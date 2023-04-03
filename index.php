@@ -5,7 +5,7 @@
 * Description: This site is optimized by Abtion
 * Author: Abtion.com
 * Author URI: http://abtion.com/
-* Version: 0.2
+* Version: 1.2.1
 * License: GPLv2 or later
 */
 

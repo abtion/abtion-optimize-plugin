@@ -7,7 +7,8 @@ function abtion_health_check() {
   $site_url = get_site_url();
   $now_time = strtotime('now');
   $email_body = [];
-  
+  $domain_pathInfo = pathinfo($_SERVER['SERVER_NAME'], PATHINFO_EXTENSION);
+
   /**
    * -------------------------------------------------------
    * Check if site has any "critical" issues (Site Health) *
@@ -33,8 +34,10 @@ function abtion_health_check() {
   $calculatedDifference = round($dateDiff / (60 * 60 * 24));
 
   // Check if theres less than 40 days to expiration
-  if($calculatedDifference < 40) {
+  if($calculatedDifference < 40 && $domain_pathInfo != 'test') {
     $email_body['SSL'] = date('d/m/Y H:i:s', $expires);
+  } else {
+    $email_body['SSL'] = 'Not applicable for DEV-sites';
   }
 
   /** --------------------------------------------------------------------------
@@ -98,8 +101,10 @@ function abtion_health_check() {
   }
 
   $last_gtmetrix = get_option('last_gtmetrix_check');
-  if(!$last_gtmetrix) {
+  if(!$last_gtmetrix && $domain_pathInfo != 'test') {
     $email_body['GTMetrix'] = abtion_gtmetrix($site_url);
+  } elseif($domain_pathInfo == 'test') {
+    $email_body['GTMetrix'] = 'Not running for DEV-sites';
   } else {
     $gtmetrix_date = $now_time - $last_gtmetrix;
     $gtmetrix_diff = round($gtmetrix_date / (60 * 60 * 24));
