@@ -10,3 +10,10 @@ errors on an existing WordPress site.
 This plugin will work on WordPress 5.2 and onward  
 It will not cause any issues on prior versions, but "Site Health" was not introduced until 5.2
 
+# Changelog
+
+- 1.2.1 - Disable SSL check and GTMetrix check for test-domains (TLD = '.test')
+- 1.2 - Checking perormance on GTMetrix, using Abtion's API
+- 1.1 - Checking SSL expiry-date - if less than 40 days, a warning will be sent to service-desk.
+- 1.0 - Testing a WordPress' sites "health" by using the buil-in health-checker.
+
